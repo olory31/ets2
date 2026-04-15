@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProBus | Fahrt-Disposition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">🚌 PlanBus <span>Schulbus</span></div>
+        <nav>
+            <div class="nav-item active" id="nav-table" onclick="showSection('table')">📊 Tabellen-Ansicht</div>
+            <div class="nav-item" id="nav-calendar" onclick="showSection('calendar')">📅 Kalender</div>
+            <div class="nav-item" onclick="window.print()">🖨️ Plan drucken</div>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <header class="main-header">
+            <h1>Fahrt-Disposition</h1>
+            <div class="stats-badge">Fahrten: <span id="tripCount">0</span></div>
+        </header>
+
+        <section class="card no-print">
+            <form id="busForm">
+                <div class="input-grid">
+                    <div class="field">
+                        <label>Datum</label>
+                        <input type="date" id="datum" required>
+                    </div>
+                    
+                    <div class="field">
+                        <label>Fahrer</label>
+                        <input type="text" id="fahrer" list="fahrer-liste" placeholder="Name eingeben..." required>
+                        <datalist id="fahrer-liste">
+                            <option value="VIE1">
+                            <option value="VIE2">
+                            <option value="DÜ5">
+                            <option value="DÜ6">
+                        </datalist>
+                    </div>
+
+                    <div class="field">
+                        <label>Von</label>
+                        <input type="text" id="von" list="orte-liste" placeholder="Startort..." required>
+                    </div>
+
+                    <div class="field">
+                        <label>Nach</label>
+                        <input type="text" id="nach" list="orte-liste" placeholder="Zielort..." required>
+                    </div>
+
+                    <datalist id="orte-liste">
+                        <option value="AvB">
+                        <option value="Remigiusschule">
+                        <option value="Körnerschule">
+                        <option value="Regentenstr.">
+                        <option value="Kref.Str.">
+                        <option value="Zweitorschule">
+                    </datalist>
+
+                    <div class="field">
+                        <label>Hinfahrt</label>
+                        <input type="time" id="hin" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Rückfahrt</label>
+                        <input type="time" id="rueck" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Fahrt speichern</button>
+            </form>
+        </section>
+
+        <section id="tableSection" class="card">
+            <table id="planTable">
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Fahrer</th>
+                        <th>Route</th>
+                        <th>Hin</th>
+                        <th>Rück</th>
+                        <th class="no-print">Aktion</th>
+                    </tr>
+                </thead>
+                <tbody id="planBody">
+                    </tbody>
+            </table>
+        </section>
+
+        <section id="calendarSection" class="card" style="display: none;">
+            <div id="calendar"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
